@@ -25,6 +25,11 @@ jobs:
         run: npm ci
       - name: Build application
         run: npm run build
+        env: 
+          PUBLIC_MICROCMS_API_KEY: ${{ secrets.PUBLIC_MICROCMS_API_KEY }}
+          PUBLIC_MICROCMS_SERVICE_DOMAIN: ${{ secrets.PUBLIC_MICROCMS_SERVICE_DOMAIN }}
+          PUBLIC_SITE_URL: ${{ secrets.PUBLIC_SITE_URL }}
+          PUBLIC_FORM_URL: ${{ secrets.PUBLIC_FORM_URL }}
       - name: Deploy to S3
         run: aws s3 sync --delete ./dist/ s3://${{ secrets.BUCKET_ID }}
       #- name: Create CloudFront invalidation
